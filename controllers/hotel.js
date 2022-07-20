@@ -1,4 +1,4 @@
-const Hotel = require ("../models/Hotel.js");
+const Hotel = require("../models/Hotel.js");
 const Room = ("../models/Room.js");
 
 module.exports.createHotel = async (req, res, next) => {
@@ -34,16 +34,31 @@ module.exports.deleteHotel = async (req, res, next) => {
 };
 module.exports.getHotel = async (req, res, next) => {
   try {
-    const hotel = await Hotel.findById(req.params.id);
-    res.status(200).json(hotel);
+    if(req.params.id != 'undefined'){
+      const hotel = await Hotel.findById(req.params.id);
+      res.status(200).json(hotel);
+    } else {
+      res.status(200).json({})
+    }
+    
   } catch (err) {
+    console.log('disini error', req.params.id)
     next(err);
   }
 };
 module.exports.getHotels = async (req, res, next) => {
-  const { min, max, ...others } = req.query;
+  const { title } = req.query;
   try {
-    const hotels = await Hotel.find()
+    const params = {}
+
+    if (title) {
+      const titleRegex = new RegExp(title, 'i')
+      params['title'] = titleRegex
+    }
+
+    console.log('ini params', params)
+
+    const hotels = await Hotel.find(params)
     res.status(200).json(hotels);
   } catch (err) {
     next(err);
