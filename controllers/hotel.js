@@ -2,7 +2,6 @@ const Hotel = require("../models/Hotel.js");
 const Room = ("../models/Room.js");
 
 module.exports.createHotel = async (req, res, next) => {
-  console.log('bodynya', req.body)
   const newHotel = new Hotel(req.body);
 
   try {
@@ -14,6 +13,7 @@ module.exports.createHotel = async (req, res, next) => {
 };
 module.exports.updateHotel = async (req, res, next) => {
   try {
+    console.log(req.body, req.params.id)
     const updatedHotel = await Hotel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
