@@ -19,14 +19,22 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 8,
   },
-  isAvatarImageSet: {
-    type: Boolean,
-    default: false,
+  phoneNumber: {
+    type: Number,
+    required: true,
+    unique: true,
+   
+
   },
-  avatarImage: {
-    type: String,
-    default: "",
+  profilePicture: {
+    type: [String],
+   
   },
+  money: {
+    type: Number,
+    
+
+  }
 });
 
 module.exports = mongoose.model("Users", userSchema);

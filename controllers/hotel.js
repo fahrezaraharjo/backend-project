@@ -13,7 +13,6 @@ module.exports.createHotel = async (req, res, next) => {
 };
 module.exports.updateHotel = async (req, res, next) => {
   try {
-    console.log(req.body, req.params.id)
     const updatedHotel = await Hotel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
@@ -42,7 +41,6 @@ module.exports.getHotel = async (req, res, next) => {
     }
     
   } catch (err) {
-    console.log('disini error', req.params.id)
     next(err);
   }
 };
@@ -56,7 +54,6 @@ module.exports.getHotels = async (req, res, next) => {
       params['title'] = titleRegex
     }
 
-    console.log('ini params', params)
 
     const hotels = await Hotel.find(params)
     res.status(200).json(hotels);
