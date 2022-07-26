@@ -3,25 +3,25 @@ const RoomSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      // required: true,
+      required: true,
     },
     price: {
       type: Number,
-      // required: true,
+      required: true,
     },
     maxPeople: {
       type: Number,
-      // required: true,
+      required: true,
     },
     desc: {
       type: String,
-      // required: true,
+      required: true,
     },
     roomNumbers: String,
     hotel: { type: mongoose.Schema.Types.ObjectId, ref: 'Hotels' },
 
   },
-  // { timestamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Rooms", RoomSchema);

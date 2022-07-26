@@ -1,6 +1,9 @@
 const Hotel = require("../models/Hotel.js");
 const Room = ("../models/Room.js");
 
+
+//----------------------CREATE--------------------------
+
 module.exports.createHotel = async (req, res, next) => {
   const newHotel = new Hotel(req.body);
 
@@ -11,6 +14,9 @@ module.exports.createHotel = async (req, res, next) => {
     next(err);
   }
 };
+
+//----------------------UPDATE--------------------------
+
 module.exports.updateHotel = async (req, res, next) => {
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
@@ -23,6 +29,9 @@ module.exports.updateHotel = async (req, res, next) => {
     next(err);
   }
 };
+
+//-----------------------DELETE-------------------------
+
 module.exports.deleteHotel = async (req, res, next) => {
   try {
     await Hotel.findByIdAndDelete(req.params.id);
@@ -31,19 +40,26 @@ module.exports.deleteHotel = async (req, res, next) => {
     next(err);
   }
 };
+
+//------------------------GET-------------------------
+
 module.exports.getHotel = async (req, res, next) => {
+ 
   try {
-    if(req.params.id != 'undefined'){
-      const hotel = await Hotel.findById(req.params.id);
+    if (req.params.id != 'undefined') {
+      const hotel = await Hotel.findById("req.params.id");
       res.status(200).json(hotel);
     } else {
       res.status(200).json({})
     }
-    
+
   } catch (err) {
     next(err);
   }
 };
+
+//----------------------GETALL------------------------
+
 module.exports.getHotels = async (req, res, next) => {
   const { title } = req.query;
   try {
@@ -61,6 +77,8 @@ module.exports.getHotels = async (req, res, next) => {
     next(err);
   }
 };
+
+
 module.exports.countByCity = async (req, res, next) => {
   const cities = req.query.cities.split(",");
   try {
@@ -76,11 +94,11 @@ module.exports.countByCity = async (req, res, next) => {
 };
 module.exports.countByType = async (req, res, next) => {
   try {
-    const hotelCount = await Hotel.countDocuments({ type: "hotel" });
-    const apartmentCount = await Hotel.countDocuments({ type: "apartment" });
-    const resortCount = await Hotel.countDocuments({ type: "resort" });
-    const villaCount = await Hotel.countDocuments({ type: "villa" });
-    const cabinCount = await Hotel.countDocuments({ type: "cabin" });
+    const hotelCount = await Hotel.countDocuments({ type: "Hotel" });
+    const apartmentCount = await Hotel.countDocuments({ type: "Apartment" });
+    const resortCount = await Hotel.countDocuments({ type: "Resort" });
+    const villaCount = await Hotel.countDocuments({ type: "Villa" });
+    const cabinCount = await Hotel.countDocuments({ type: "Cabin" });
 
     res.status(200).json([
       { type: "hotel", count: hotelCount },

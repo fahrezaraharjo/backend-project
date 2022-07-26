@@ -1,4 +1,4 @@
-const Room = require ("../models/Room.js");
+ const Room = require ("../models/Room.js");
 const Hotel = require ("../models/Hotel.js");
 
 module.exports.createRoom = async (req, res, next) => {

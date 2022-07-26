@@ -85,3 +85,16 @@ module.exports.logOut = (req, res, next) => {
     next(ex);
   }
 };
+module.exports.getUser = async (req, res, next) => {
+  try {
+    if(req.params.id != 'undefined'){
+      const users = await users.findById(req.params.id);
+      res.status(200).json(users);
+    } else {
+      res.status(200).json({})
+    }
+    
+  } catch (err) {
+    next(err);
+  }
+};

@@ -28,7 +28,16 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-
+app.use((err, req, res, next)=>{
+  const errorStatus = err.status || 500
+  const errorMessage = err.status || "something went wrong"
+   return res.status(500).json({
+    succes: false,
+    status:errorStatus,
+    message:errorMessage,
+    stack:error.stack
+   })
+})
 app.use("/api/auth", authRoutes);
 app.use("/api/hotels", hotelRoutes)
 app.use("/api/rooms", roomRoutes)
